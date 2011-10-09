@@ -3,7 +3,7 @@ require 'haml'
 require './models'
 
 
-get '/admin' do
+get '/admin/' do
   @all_pages = Page.all
   haml :'admin/index', :layout => :'admin/layout'
 end
@@ -14,11 +14,11 @@ end
 
 post '/admin/page/create' do
   Page.new_from(params).save()
-  redirect '/admin'
+  redirect '/admin/'
 end
 
 get '/admin/page/delete/:page_id' do
   Page.where(_id: params[:page_id]).delete
-  redirect '/admin'
+  redirect '/admin/'
 end
 

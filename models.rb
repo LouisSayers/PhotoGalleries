@@ -1,3 +1,4 @@
+require 'mongoid'
 
 class Page
   include Mongoid::Document
@@ -13,3 +14,4 @@ class Page
              markup: params[:markup])
   end
 end
+

@@ -17,7 +17,10 @@
           %a{:class => 'brand', :href => '#'} PhotoGalleri.es
           %ul{:class=>'nav'}
             %li{:class => 'active'}
-              %a{:href => '/admin'} Home
+              %a{:href => '/admin/'} Admin
+          -if @logged_in
+            .span2{:style => 'float:right;padding-top:1em;'}
+              %a{:href => '/logout'} Logout
     .container
       .page
         =yield

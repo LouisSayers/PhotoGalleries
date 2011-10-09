@@ -4,3 +4,4 @@ source "http://gemcutter.org"
 
 gem "sinatra", "~> 1.2"
 gem "haml"
+gem "rpx_now"
