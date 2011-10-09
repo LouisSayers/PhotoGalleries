@@ -9,16 +9,16 @@ get '/admin' do
 end
 
 get '/admin/page/create' do
-  haml :'admin/create_a_page'
+  haml :'/admin/create_a_page', :layout => :'admin/layout'
 end
 
 post '/admin/page/create' do
   Page.new_from(params).save()
-  redirect '/admin', :layout => :'admin/layout'
+  redirect '/admin'
 end
 
 get '/admin/page/delete/:page_id' do
   Page.where(_id: params[:page_id]).delete
-  redirect '/admin', :layout => :'admin/layout'
+  redirect '/admin'
 end
 
