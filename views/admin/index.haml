@@ -10,7 +10,7 @@
           .span12
             %h3 Pages:
           .span4{:style=> 'padding-top:1em;'}
-            %a{:href => '/page/create'} Create a page
+            %a{:href => '/admin/page/create'} Create a page
         -if @all_pages.count == 0
           .row
             .span16 No pages created yet...
@@ -25,6 +25,6 @@
               .span4
                 =page.name
               .span4
-                %a{:href => "/page/delete/#{page.id}"} Delete
+                %a{:href => "/admin/page/delete/#{page.id}"} Delete
 
 
