@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    %link{:rel=>'stylesheet', :href=>'http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css'}
+  %body
+    :css
+      html, body {background-color:#eee;}
+      body {padding-top:40px;}
+      .page {background-color:#fff;padding:20px;border-radius: 0 0 6px 6px;}
+      .header {margin-bottom:15px;}
+      footer p {text-align:center;}
+      #listed-pages-heading{ font-weight:bold; }
+
+    .topbar
+      .fill
+        .container
+          %a{:class => 'brand', :href => '#'} PhotoGalleri.es
+          %ul{:class=>'nav'}
+            %li{:class => 'active'}
+              %a{:href => '/'} Home
+            %li
+              %a{:href => '/about'} About
+            %li
+              %a{:href => '/contact'} Contact
+    .container
+      .page
+        =yield
+      %footer
+        %p © Louis Sayers 2011

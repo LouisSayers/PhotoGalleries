@@ -1,0 +1,26 @@
+.page-header
+  %h1 Create your page :)
+%form{:action => '/page/create', :method => 'post'}
+  %fieldset
+    .clearfix
+      %label{:for => 'name'} Page name:
+      .input
+        %input{:class => 'xlarge', :name=> 'name', :type => 'text'}
+        %span{:class => 'help-block'}
+          See your page 'my-page/name' at 'http://my-site-name.photogalleri.es/my-page/name'
+    .clearfix
+      %label{:for => 'content'} Page content:
+      .input
+        %textarea{:class => 'xxlarge', :name => 'content', :rows => '10'}
+        %span{:class => 'help-block'}
+          Enter markup, have fun!
+    .clearfix
+      %label{:for => 'markup'} Markup type:
+      .input
+        %select{:class => 'medium', :name => 'markup'}
+          %option html
+          %option haml
+        %span{:class => 'help-block'}
+          In what format would you like to write your html?
+    .actions
+      %input{:type => 'submit', :class => 'btn primary', :value => 'Create Page'}

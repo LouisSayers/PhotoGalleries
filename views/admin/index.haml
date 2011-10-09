@@ -1,0 +1,30 @@
+.header
+  .row
+    .span16
+      %h1 Welcome
+.content
+  .section{:id => 'pages'}
+    .row
+      .span16
+        .row
+          .span12
+            %h3 Pages:
+          .span4{:style=> 'padding-top:1em;'}
+            %a{:href => '/page/create'} Create a page
+        -if @all_pages.count == 0
+          .row
+            .span16 No pages created yet...
+        -else
+          .row{:id => 'listed-pages-heading'}
+            .span4
+              Page name:
+            .span4
+              Actions
+          -@all_pages.each do |page|
+            .row
+              .span4
+                =page.name
+              .span4
+                %a{:href => "/page/delete/#{page.id}"} Delete
+
+
