@@ -33,7 +33,7 @@ get '/admin/page/edit/:page_id' do
 end
 
 post '/admin/page/save/:page_id' do
-  #Update the page Page.update(params[:page_id], params)
+  Page.update(params[:page_id], params)
   redirect '/admin/'
 end
 

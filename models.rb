@@ -13,5 +13,15 @@ class Page
              content: params[:content],
              markup: params[:markup])
   end
+
+  def self.update(page_id, params)
+    page = Page.where(_id: page_id).first
+    return if page.nil?
+
+    page.name = params[:name]
+    page.content = params[:content]
+    page.markup = params[:markup]
+    page.save
+  end
 end
 

@@ -23,7 +23,7 @@
           -@all_pages.each do |page|
             .row
               .span4
-                =page.name
+                %a{:href => page.name}=page.name
               .span2
                 %a{:href => "/admin/page/edit/#{page.id}"} Edit
               .span2
