@@ -1,0 +1,42 @@
+-if @page.nil?
+  -@page_action='/admin/page/create'
+  -@page_header='Create your page :)'
+  -@page_submit_text='Create Page'
+  -@page_markup={'html' => 'selected'}
+-else
+  -@page_action="/admin/page/save/#{@page.id}"
+  -@page_header='Edit your page :)'
+  -@page_name=@page.name
+  -@page_content=@page.content
+  -@page_submit_text='Save Page'
+  -@page_markup={@page.markup => 'selected'}
+
+
+.page-header
+  %h1=@page_header
+
+%form{:action => @page_action, :method => 'post'}
+  %fieldset
+    .clearfix
+      %label{:for => 'name'} Page name:
+      .input
+        %input{:class => 'xlarge', :name=> 'name', :type => 'text', :value => @page_name}
+        %span{:class => 'help-block'}
+          See your page 'my-page/name' at 'http://my-site-name.photogalleri.es/my-page/name'
+    .clearfix
+      %label{:for => 'content'} Page content:
+      .input
+        %textarea{:class => 'xxlarge', :name => 'content', :rows => '10'}
+          =@page_content
+        %span{:class => 'help-block'}
+          Enter markup, have fun!
+    .clearfix
+      %label{:for => 'markup'} Markup type:
+      .input
+        %select{:class => 'medium', :name => 'markup'}
+          %option{:selected =>@page_markup['html']} html
+          %option{:selected =>@page_markup['haml']} haml
+        %span{:class => 'help-block'}
+          In what format would you like to write your html?
+    .actions
+      %input{:type => 'submit', :class => 'btn primary', :value => @page_submit_text}

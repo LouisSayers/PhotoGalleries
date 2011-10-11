@@ -24,7 +24,9 @@
             .row
               .span4
                 =page.name
-              .span4
+              .span2
+                %a{:href => "/admin/page/edit/#{page.id}"} Edit
+              .span2
                 %a{:href => "/admin/page/delete/#{page.id}"} Delete
 
 
