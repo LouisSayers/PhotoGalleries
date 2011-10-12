@@ -1,16 +1,15 @@
 require 'sinatra'
 require 'haml'
+require 'liquid'
 require './models'
 
 
 get %r{^(?!/admin/.*$)(.*)} do |page_name|
   page = Page.where(name: page_name).first
+  return haml :login if page_name == '/login'
   return haml :error_page if page.nil?
 
-  return haml :html_content, :locals => {:content => page.content} if page.markup == 'html'
-  return haml page.content.to_s if page.markup == 'haml'
-
-  return haml :error_page
+  return Liquid::Template.parse(page.content).render 'testing' => "here's some test stuff!"
 end
 
 get '/admin/' do

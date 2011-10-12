@@ -4,4 +4,5 @@ source "http://gemcutter.org"
 
 gem "sinatra", "~> 1.2"
 gem "haml"
+gem 'liquid'
 gem "rpx_now"

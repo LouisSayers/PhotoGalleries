@@ -6,12 +6,10 @@ class Page
 
   field :name, type: String
   field :content, type: String
-  field :markup, type: String
 
   def self.new_from(params)
     Page.new(name: params[:name],
-             content: params[:content],
-             markup: params[:markup])
+             content: params[:content])
   end
 
   def self.update(page_id, params)
@@ -20,7 +18,6 @@ class Page
 
     page.name = params[:name]
     page.content = params[:content]
-    page.markup = params[:markup]
     page.save
   end
 end
