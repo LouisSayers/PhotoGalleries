@@ -8,7 +8,7 @@ class Page
   field :content, type: String
 
   def self.new_from(params)
-    Page.new(name: params[:name],
+    Page.new(name: "/#{params[:name]}",
              content: params[:content])
   end
 
