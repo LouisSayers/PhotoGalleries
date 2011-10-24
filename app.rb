@@ -5,8 +5,9 @@ require './models'
 
 
 get %r{^(?!/admin/.*$)(.*)} do |page_name|
+  pass if page_name == '/login'
+
   page = Page.where(name: page_name).first
-  return haml :login if page_name == '/login'
   return haml :error_page if page.nil?
 
   return Liquid::Template.parse(page.content).render 'testing' => "here's some test stuff!"
