@@ -6,6 +6,7 @@ require './models'
 
 get %r{^(?!/admin/.*$)(.*)} do |page_name|
   pass if page_name == '/login'
+  pass if page_name == '/logout'
 
   page = Page.where(name: page_name).first
   return haml :error_page if page.nil?

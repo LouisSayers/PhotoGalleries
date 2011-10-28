@@ -4,17 +4,23 @@ class Person
   include Mongoid::Document
   store_in :people
 
-  field :login_identifier, type: String
+  field :twitter_user_id, type: String
   field :session_ids, type: Array
   field :subdomain, type: String
 
   def login
     self.session_ids = [] if self.session_ids.nil?
-    self.session_ids << Digest::MD5.hexdigest("#{self.login_identifier}#{Time.now}").to_s()
+    self.session_ids << Digest::MD5.hexdigest("#{self.twitter_user_id}#{Time.now}").to_s()
   end
 
   def logout
     self.session_ids = []
+  end
+
+  def self.get_or_create(twitter_user_id)
+    person = Person.where(twitter_user_id: twitter_user_id).first
+    return person if !person.nil?
+    return Person.new(twitter_user_id: twitter_user_id)
   end
 
   def self.with(session_id)

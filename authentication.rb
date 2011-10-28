@@ -40,10 +40,17 @@ get '/login' do
   end
 
   if @twitter_client.authorized?
-    puts @twitter_client.methods
-    return "authenticated! wohoooo!"
+    twitter_id = @twitter_client.info["id"]
+    redirect '/' if twitter_id.nil? or twitter_id == ""
+
+    person = Person.get_or_create(twitter_id)
+    person.login
+    person.save
+    session[:id] = person.session_ids[0]
+
+    redirect '/admin/'
   else
-    return "Noo... not authenticated..."
+    redirect '/'
   end
 end
 
@@ -57,5 +64,5 @@ get '/logout' do
   end
   session[:id] = ''
   @logged_in = false
-  redirect '/login'
+  redirect '/'
 end
