@@ -6,13 +6,19 @@
   .section{:id => 'site_name'}
     .row
       .span16
-        .row
-          .span12
-            %h3 Site name:
-        .row
-          .span4 Choose the name
-          .span8
-            %input{:type => 'text'}
+        %form{:action=>'/admin/subdomain/create', :method=>'post'}
+          .row
+            .span12
+              %h3 Site:
+          .row
+            .span4
+              %label="Name"
+            .span4
+              %input{:type => 'text', :name=> 'subdomain'}
+              %span{:class=> 'help-block'}="Site name is currently '#{@user.subdomain}.PhotoGalleri.es'"
+            .span4
+              %input{:type => 'submit', :value=>'choose site name', :class=>'btn'}
+
 
   .section{:id => 'pages'}
     .row

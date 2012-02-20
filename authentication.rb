@@ -29,7 +29,7 @@ before '/admin/*' do
 end
 
 
-get '/login' do
+get '/twitter_login' do
   begin
     @access_token = @twitter_client.authorize(
       session[:request_token],
@@ -43,7 +43,7 @@ get '/login' do
     twitter_id = @twitter_client.info["id"]
     redirect '/' if twitter_id.nil? or twitter_id == ""
 
-    person = Person.get_or_create(twitter_id)
+    person = Person.get_or_create(twitter_id, 'twitter')
     person.login
     person.save
     session[:id] = person.session_ids[0]

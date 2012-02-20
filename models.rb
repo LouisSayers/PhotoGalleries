@@ -4,9 +4,10 @@ class Person
   include Mongoid::Document
   store_in :people
 
-  field :twitter_user_id, type: String
+  field :user_id, type: String
+  field :auth_type, type: String
   field :session_ids, type: Array
-  field :subdomain, type: String
+  embeds_many :sites
 
   def login
     self.session_ids = [] if self.session_ids.nil?
@@ -17,10 +18,10 @@ class Person
     self.session_ids = []
   end
 
-  def self.get_or_create(twitter_user_id)
-    person = Person.where(twitter_user_id: twitter_user_id).first
+  def self.get_or_create(user_id, auth_type)
+    person = Person.where(user_id: user_id, auth_type: auth_type).first
     return person if !person.nil?
-    return Person.new(twitter_user_id: twitter_user_id)
+    return Person.new(user_id: user_id, auth_type: auth_type)
   end
 
   def self.with(session_id)
@@ -28,9 +29,19 @@ class Person
   end
 end
 
+class Site
+  include Mongoid::Document
+  store_in :sites
+  embedded_in :person
+  embeds_many :sites
+
+  field :subdomain, type: String
+end
+
 class Page
   include Mongoid::Document
   store_in :pages
+  embedded_in :site
 
   field :name, type: String
   field :content, type: String
@@ -49,4 +60,5 @@ class Page
     page.save
   end
 end
+
 

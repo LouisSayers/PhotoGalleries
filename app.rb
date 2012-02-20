@@ -8,6 +8,11 @@ get %r{^(?!/admin/.*$)(.*)} do |page_name|
   pass if page_name == '/login'
   pass if page_name == '/logout'
 
+  puts @request.methods
+  subdomain = @request.subdomains.last
+  Page.where(name: page_name)
+  return haml :index if page_name == '/'
+
   page = Page.where(name: page_name).first
   return haml :error_page if page.nil?
 
@@ -15,8 +20,19 @@ get %r{^(?!/admin/.*$)(.*)} do |page_name|
 end
 
 get '/admin/' do
+  @user = Person.with(session[:id])
   @all_pages = Page.all
   haml :'admin/index', :layout => :'admin/layout'
+end
+
+post '/admin/subdomain/create' do
+  subdomain = params[:subdomain]
+
+  return 'site name already taken' if !Person.where(subdomain: subdomain).first.nil? #could write this better maybe?
+
+  user = Person.with(session[:id])
+  user.subdomain = subdomain
+  user.save
 end
 
 get '/admin/page/create' do
